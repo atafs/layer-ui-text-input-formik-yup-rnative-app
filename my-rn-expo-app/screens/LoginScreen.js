@@ -1,5 +1,11 @@
 import React from 'react';
 import { StyleSheet, Image, View, SafeAreaView } from 'react-native';
+import * as Yup from 'yup';
+
+import AppFormField from '../components/AppFormField';
+import AppForm from '../components/AppForm';
+import SubmitButton from '../components/SubmitButton';
+
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import colors from '../config/colors';
@@ -22,59 +28,32 @@ function LoginScreen() {
                     style={styles.logo}
                     source={require('../assets/logo.png')}
                 />
-                <Formik
+                <AppForm
                     initialValues={{ email: '', password: '' }}
                     onSubmit={(values) => console.log(values)}
                     validationSchema={validationSchema}>
-                    {({
-                        handleChange,
-                        handleSubmit,
-                        errors,
-                        setFieldTouched,
-                        touched,
-                    }) => (
-                        <>
-                            <AppTextInput
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                icon="email"
-                                keyboardType="email-address"
-                                onBlur={() => {
-                                    setFieldTouched('email');
-                                }}
-                                onChangeText={handleChange('email')}
-                                placeholder="Email"
-                                // iOS only: auto fill from keychain
-                                textContentType="emailAddress"
-                            />
-                            <ErrorMessage
-                                error={errors.email}
-                                visible={touched.email}
-                            />
-                            <AppTextInput
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                icon="lock"
-                                placeholder="Password"
-                                onBlur={() => {
-                                    setFieldTouched('password');
-                                }}
-                                onChangeText={handleChange('password')}
-                                secureTextEntry
-                                // iOS only: auto fill from keychain
-                                textContentType="password"
-                            />
-                            <ErrorMessage
-                                error={errors.password}
-                                visible={touched.password}
-                            />
-                            <AppButton
-                                title="Login"
-                                onPress={() => handleSubmit}
-                            />
-                        </>
-                    )}
-                </Formik>
+                    <AppFormField
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        icon="email"
+                        keyboardType="email-address"
+                        name="email"
+                        placeholder="Email"
+                        // iOS only: auto fill from keychain
+                        textContentType="emailAddress"
+                    />
+                    <AppFormField
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        icon="lock"
+                        placeholder="Password"
+                        name="password"
+                        secureTextEntry
+                        // iOS only: auto fill from keychain
+                        textContentType="password"
+                    />
+                    <SubmitButton title="Login" />
+                </AppForm>
             </View>
         </SafeAreaView>
     );
