@@ -10,10 +10,7 @@ const AppFormField = ({ name, ...otherProps }) => {
         handleChange,
         errors,
         touched,
-        values,
     } = useFormikContext();
-    console.log(values);
-
     return (
         <>
             <AppTextInput
