@@ -8,6 +8,8 @@ import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
 import AppText from '../components/AppText';
 import ErrorMessage from '../components/ErrorMessage';
+import AppFormField from '../components/AppFormField';
+import SubmitButton from '../components/SubmitButton';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label('Email'),
@@ -34,44 +36,27 @@ function LoginScreen() {
                         touched,
                     }) => (
                         <>
-                            <AppTextInput
+                            <AppFormField
                                 autoCapitalize="none"
                                 autoCorrect={false}
                                 icon="email"
                                 keyboardType="email-address"
-                                onBlur={() => {
-                                    setFieldTouched('email');
-                                }}
-                                onChangeText={handleChange('email')}
                                 placeholder="Email"
+                                name="email"
                                 // iOS only: auto fill from keychain
                                 textContentType="emailAddress"
                             />
-                            <ErrorMessage
-                                error={errors.email}
-                                visible={touched.email}
-                            />
-                            <AppTextInput
+                            <AppFormField
                                 autoCapitalize="none"
                                 autoCorrect={false}
                                 icon="lock"
+                                name="password"
                                 placeholder="Password"
-                                onBlur={() => {
-                                    setFieldTouched('password');
-                                }}
-                                onChangeText={handleChange('password')}
                                 secureTextEntry
                                 // iOS only: auto fill from keychain
                                 textContentType="password"
                             />
-                            <ErrorMessage
-                                error={errors.password}
-                                visible={touched.password}
-                            />
-                            <AppButton
-                                title="Login"
-                                onPress={() => handleSubmit}
-                            />
+                            <SubmitButton title="Login" />
                         </>
                     )}
                 </Formik>
