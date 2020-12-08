@@ -1,5 +1,11 @@
 import React from 'react';
 import { StyleSheet, Image, View, SafeAreaView } from 'react-native';
+import * as Yup from 'yup';
+
+import AppFormField from '../components/AppFormField';
+import AppForm from '../components/AppForm';
+import SubmitButton from '../components/SubmitButton';
+
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import colors from '../config/colors';
@@ -24,7 +30,7 @@ function LoginScreen() {
                     style={styles.logo}
                     source={require('../assets/logo.png')}
                 />
-                <Formik
+                <AppForm
                     initialValues={{ email: '', password: '' }}
                     onSubmit={(values) => console.log(values)}
                     validationSchema={validationSchema}>
